@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ensiklopedia AI Peradaban Islam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;500;700&family=Kufam:ital,wght@0,400;0,700;1,400&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+   crossorigin=""/>
+  <!-- PDF Export Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --font-sans: 'Laila', sans-serif;
+      --font-arabic: 'Kufam', 'Amiri', serif;
+    }
+    body {
+      font-family: var(--font-sans);
+    }
+    :lang(ar) {
+      font-family: var(--font-arabic);
+    }
+    .timeline-scrollbar-hidden::-webkit-scrollbar {
+      display: none;
+    }
+    .timeline-scrollbar-hidden {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.5s ease-in-out;
+    }
+    @keyframes fade-in-down {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-fade-in-down {
+        animation: fade-in-down 0.2s ease-out;
+    }
+    /* Simple filter for dark mode tiles to avoid blinding white maps */
+    html.dark .leaflet-tile-pane {
+        filter: invert(1) hue-rotate(180deg) brightness(95%) contrast(90%);
+    }
+    /* Custom Numbered Marker Icon Styles */
+    .numbered-marker-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #D97706; /* amber-600 */
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+      line-height: 1; /* Ensure number is centered vertically */
+    }
+
+    html.dark .numbered-marker-icon {
+        background-color: #FBBF24; /* amber-400 */
+        color: #44403c; /* gray-800 */
+        border-color: #27272a; /* gray-800 */
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Laila', 'sans-serif'],
+            kufam: ['Kufam', 'sans-serif'],
+            amiri: ['Amiri', 'serif'],
+          },
+          animation: {
+            'fade-in': 'fade-in 0.5s ease-in-out',
+            'fade-in-down': 'fade-in-down 0.2s ease-out',
+          },
+          keyframes: {
+            'fade-in': {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            'fade-in-down': {
+                '0%': {
+                    opacity: '0',
+                    transform: 'translateY(-10px)'
+                },
+                '100%': {
+                    opacity: '1',
+                    transform: 'translateY(0)'
+                },
+            },
+          },
+        },
+      },
+      plugins: [],
+    }
+  </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.19.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.2.1",
+    "react-leaflet": "https://aistudiocdn.com/react-leaflet@^5.0.0",
+    "leaflet": "https://aistudiocdn.com/leaflet@^1.9.4",
+    "geojson": "https://aistudiocdn.com/geojson@^0.5.0"
+  }
+}
+</script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
