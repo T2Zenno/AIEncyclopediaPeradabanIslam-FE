@@ -1272,6 +1272,14 @@ const App: React.FC = () => {
         await contentService.saveDirectoryData(newData);
     };
 
+    const handleNavigateHome = () => {
+        setViewMode('encyclopedia');
+        setQuery('');
+        setGeminiResponse(null);
+        setActiveQuery('');
+        setError(null);
+    };
+
     if (isInitializing) {
         return (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
@@ -1286,11 +1294,11 @@ const App: React.FC = () => {
     
     return (
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 flex flex-col transition-colors duration-300">
-        <Navbar 
+        <Navbar
           viewMode={viewMode}
-          onShowHistory={() => setShowHistoryPage(true)} 
-          onShowDashboard={() => setViewMode('admin')} 
-          onNavigateHome={() => setViewMode('encyclopedia')}
+          onShowHistory={() => setShowHistoryPage(true)}
+          onShowDashboard={() => setViewMode('admin')}
+          onNavigateHome={handleNavigateHome}
         />
         
         {showHistoryPage && (
